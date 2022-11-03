@@ -30,4 +30,10 @@ bot.on('contact', context => {
   `)
 })
 
+bot.on('voice', context => {
+  const voice = context.update.message.voice
+  console.log(voice)
+  context.reply(`Audio received, it has ${voice.duration} seconds`)
+})
+
 bot.startPolling() 
