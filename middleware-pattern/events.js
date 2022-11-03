@@ -22,4 +22,12 @@ bot.on('location', context => {
   )
 })
 
+bot.on('contact', context => {
+  const contact = context.update.message.contact
+  console.log(contact)
+  context.reply(`I'll remember
+    ${contact.first_name} (${contact.phone_number})
+  `)
+})
+
 bot.startPolling() 
