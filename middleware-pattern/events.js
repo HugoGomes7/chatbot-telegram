@@ -44,4 +44,12 @@ bot.on('photo', context => {
   })
 })
 
+bot.on('sticker', context => {
+  const sticker = context.update.message.sticker
+  console.log(sticker)
+  context.reply(`You sended the sticker
+    ${sticker.emoji} of the set ${sticker.set_name}
+  `)
+})
+
 bot.startPolling() 
