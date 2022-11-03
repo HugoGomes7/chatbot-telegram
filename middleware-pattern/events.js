@@ -36,4 +36,12 @@ bot.on('voice', context => {
   context.reply(`Audio received, it has ${voice.duration} seconds`)
 })
 
+bot.on('photo', context => {
+  const photo = context.update.message.photo
+  console.log(photo)
+  photo.forEach((ph, i) => {
+    context.reply(`Photo ${i} has resolution of ${ph.width}x${ph.height}`)
+  })
+})
+
 bot.startPolling() 
