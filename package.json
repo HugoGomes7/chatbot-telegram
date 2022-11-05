@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/HugoGomes7/chatbot-telegram#readme",
   "dependencies": {
+    "axios": "0.17.1",
     "telegraf": "3.17.3"
   }
 }
