@@ -1,7 +1,7 @@
 const env = require('../.env')
 const Telegraf = require('telegraf')
-const bot = new Telegraf(env.token)
 const axios = require('axios')
+const bot = new Telegraf(env.token)
 
 bot.on('voice', async context => {
   const id = context.update.message.voice.file_id
