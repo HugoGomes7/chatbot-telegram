@@ -3,7 +3,7 @@ const Telegraf = require('telegraf')
 const bot = new Telegraf(env.token)
 
 bot.start(context => {
-  if (context.update.message.from.id == `${env.clientId}`) {
+  if (context.update.message.from.id == `${env.myId}`) {
     context.reply('Hi, mister!')
   }
   else {
