@@ -20,7 +20,7 @@ bot.start(async context => {
 })
 
 bot.use((context, next) => {
-  const chatId = context.chat.id
+  const chatId = context.chat
   if (!data.hasOwnProperty(chatId)) data[chatId] = []
   context.itens = data[chatId]
   next()
