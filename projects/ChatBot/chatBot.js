@@ -86,7 +86,7 @@ bot.on('location', async context => {
     await context.reply(`Current temperature: ${res.data.main.temp}°C`, keyboardOptions)
   }
   catch (e) {
-    context.reply('erro, não deu certo', keyboardOptions)
+    context.reply('Im having trouble finding your location. Are you sure you are on planet Terra?', keyboardOptions)
   }
 })
 
