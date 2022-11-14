@@ -45,10 +45,13 @@ bot.hears('What was I developed for?', async context => {
   await context.replyWithMarkdown(`\n\n_Can I help you with anything?_`, keyboardOptions)
 })
 
-const functionButtons = Extra.markup(Markup.inlineKeyboard([
+const buttonsYN = Extra.markup(Markup.inlineKeyboard([
   Markup.callbackButton('Yes', 'y'),
   Markup.callbackButton('No', 'n')
 ], { columns: 2 }))
 
+bot.hears('Can I automate tasks?', async context => {
+  await context.replyWithMarkdown('Of course!!!\nDo you want to test?')
+})
 
 bot.startPolling()
