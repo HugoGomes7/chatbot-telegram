@@ -51,7 +51,43 @@ const buttonsYN = Extra.markup(Markup.inlineKeyboard([
 ], { columns: 2 }))
 
 bot.hears('Can I automate tasks?', async context => {
-  await context.replyWithMarkdown('Of course!!!\nDo you want to test?')
+  await context.replyWithMarkdown('Of course!!!\nDo you want to test?', buttonsYN)
+})
+
+bot.action('n', context => {
+  context.reply('Ok.', keyboardOptions)
+})
+
+bot.hears([/any message/i, /mensagem qualquer/i], context => {
+  context.reply('HAHAHA this joke is very old. Try other...', keyboardOptions)
+})
+
+bot.on('text', async context => {
+  let message = context.message.text
+  message = message.split('').reverse().join('')
+  await context.reply(`The your message on the contrary is: ${message}`)
+  await context.reply('That means I can read the messages your send and process them. :)')
+})
+
+const location = Markup.keyboard([
+  Markup.locationRequestButton('Click here to sent your location!')
+]).resize().oneTime().extra()
+
+bot.action('y', async context => {
+  await context.reply('Alright... Send me your location or write on a any message...', location)
+})
+
+bot.on('location', async context => {
+  try {
+    const apiWeatherURL = 'https://api.openweathermap.org/data/2.5/weather'
+    const { latitude: lat, longitude: lon } = context.message.location
+    const res = await axios.get(`${apiWeatherURL}?lat=${lat}&lon=${lon}&appid=263e96693cdf4f0563b2b60d386367aa&units=metric`)
+    await context.reply(`Hmmm... you are in ${res.data.name}`)
+    await context.reply(`Current temperature: ${res.data.main.temp}°C`, keyboardOptions)
+  }
+  catch (e) {
+    context.reply('erro, não deu certo', keyboardOptions)
+  }
 })
 
 bot.startPolling()
