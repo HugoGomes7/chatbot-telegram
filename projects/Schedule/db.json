@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "description": "To study Javascript",
+      "dt_prevision": "2022-12-04",
+      "dt_conclusion": null,
+      "observation": "To post on LinkedIn what I am studying "
+    },
+    {
+      "id": 2,
+      "description": "To start one new project",
+      "dt_prevision": "2022-12-05",
+      "dt_conclusion": null,
+      "observation": "Create concept map before."
+    },
+    {
+      "id": 3,
+      "description": "Test",
+      "dt_prevision": "2022-12-22",
+      "dt_conclusion": null,
+      "observation": "test 3"
+    }
+  ]
+}
