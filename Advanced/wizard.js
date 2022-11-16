@@ -1,4 +1,4 @@
-const env = require('../../.env')
+const env = require('../.env')
 const Telegraf = require('telegraf')
 const Composer = require('telegraf/composer')
 const session = require('telegraf/session')
