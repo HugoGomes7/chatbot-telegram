@@ -33,7 +33,7 @@ const displayTask = async (context, taskId, newMessage = false) => {
 const buttonsSchedule = tasks => {
   const buttons = tasks.map(item => {
     const Date = item.dt_prevision ? `${moment(item.dt_prevision).format('DD/MM/YYYY')} - ` : ''
-    return [Markup.callbackButton(`${Date}${item.description}`, `show ${item.id}`)]
+    return [Markup.callbackButton(`${Date}${item.description}`, `display ${item.id}`)]
   })
   return Extra.markup(Markup.inlineKeyboard(buttons, { columns: 1 }))
 }
@@ -49,3 +49,9 @@ bot.command('day', async context => {
   const tasks = await getSchedule(moment())
   context.reply(`Here is the your schedule of day`, buttonsSchedule(tasks))
 })
+
+bot.action(/display (.+)/, async context => {
+  await displayTask(context, context.match[1])
+})
+
+bot.startPolling()
