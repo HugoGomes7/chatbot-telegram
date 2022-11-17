@@ -11,4 +11,37 @@ bot.start(context => {
   context.reply(`Welcome, ${name}!`)
 })
 
-const formatData = data => data ? moment(data).format('DD/MM/YYYY') : ''
+const formatDate = Date => Date ? moment(Date).format('DD/MM/YYYY') : ''
+
+const displayTask = async (context, taskId, newMessage = false) => {
+  const task = await getTask(taskId)
+  const conclusion = task.dt_conclusion ? `\n<b>Completed in:</b> ${formatDate(task.dt_conclusion)}` : ''
+  const msg = `
+    <b>${task.description}</b>
+    <b>Prevision:</b> ${formatDate(task.dt_prevision)}${conclusion}
+    <b>Observations:</b>\n${task.observation || ''}
+  `
+
+  if (newMessage) {
+    context.reply(msg, buttonsTask(taskId))
+  }
+  else {
+    context.editMessage(msg, buttonsTask(taskId))
+  }
+}
+
+const buttonsSchedule = tasks => {
+  const buttons = tasks.map(item => {
+    const Date = item.dt_prevision ? `${moment(item.dt_prevision).format('DD/MM/YYYY')} - ` : ''
+    return [Markup.callbackButton(`${Date}${item.description}`, `show ${item.id}`)]
+  })
+  return Extra.markup(Markup.inlineKeyboard(buttons, { columns: 1 }))
+}
+
+const buttonsTask = idTask => Extra.HTML().markup(Markup.inlineKeyboard[
+  Markup.callbackButton('', `Completed ${idTask}`),
+  Markup.callbackButton('', `setDate ${idTask}`),
+  Markup.callbackButton('', `addNota ${idTask}`),
+  Markup.callbackButton('', `Delete ${idTask}`)
+], { columns: 4 })
+
