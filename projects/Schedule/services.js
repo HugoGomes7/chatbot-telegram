@@ -1,7 +1,7 @@
 const moment = require('moment')
 const axios = require('axios')
 
-const baseUrl = 'https://localhost:3001/tasks'
+const baseUrl = 'http://localhost:3001/tasks'
 
 const getSchedule = async date => {
   const url = `${baseUrl}?_sort=dt_prevision,description&_order=asc`
@@ -18,5 +18,5 @@ const getTask = async id => {
 
 module.exports = {
   getSchedule,
-  getTask,
+  getTask
 }
