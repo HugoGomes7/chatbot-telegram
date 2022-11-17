@@ -10,3 +10,5 @@ bot.start(context => {
   const name = context.update.message.from.first_name
   context.reply(`Welcome, ${name}!`)
 })
+
+const formatData = data => data ? moment(data).format('DD/MM/YYYY') : ''
