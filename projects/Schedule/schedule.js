@@ -3,19 +3,29 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const moment = require('moment')
-const bot = new Telegraf(env.token)
 const { getSchedule, getTask } = require('./services')
+
+const bot = new Telegraf(env.token)
 
 bot.start(context => {
   const name = context.update.message.from.first_name
   context.reply(`Welcome, ${name}!`)
 })
 
-const formatDate = date => date ? moment(date).format('DD/MM/YYYY') : ''
+const buttonsTask = idTask => Extra.HTML().markup(Markup.inlineKeyboard([
+  Markup.callbackButton('✔️', `Conclude ${idTask}`),
+  Markup.callbackButton('📅', `setDate ${idTask}`),
+  Markup.callbackButton('📝', `addNote ${idTask}`),
+  Markup.callbackButton('❌', `Delete ${idTask}`),
+], { columns: 4 }))
+
+const formatDate = date =>
+  date ? moment(date).format('DD/MM/YYYY') : ''
 
 const displayTask = async (context, taskId, newMessage = false) => {
   const task = await getTask(taskId)
-  const conclusion = task.dt_conclusion ? `\n<b>Completed in:</b> ${formatDate(task.dt_conclusion)}` : ''
+  const conclusion = task.dt_conclusion ?
+    `\n<b>Completed in:</b> ${formatDate(task.dt_conclusion)}` : ''
   const msg = `
     <b>${task.description}</b>
     <b>Prevision:</b> ${formatDate(task.dt_prevision)}${conclusion}
@@ -37,13 +47,6 @@ const buttonsSchedule = tasks => {
   })
   return Extra.markup(Markup.inlineKeyboard(buttons, { columns: 1 }))
 }
-
-const buttonsTask = idTask => Extra.HTML().markup(Markup.inlineKeyboard([
-  Markup.callbackButton('✔️', `Conclude ${idTask}`),
-  Markup.callbackButton('📅', `setDate ${idTask}`),
-  Markup.callbackButton('📝', `addNote ${idTask}`),
-  Markup.callbackButton('❌', `Delete ${idTask}`),
-], { columns: 4 }))
 
 bot.command('day', async context => {
   const tasks = await getSchedule(moment())
