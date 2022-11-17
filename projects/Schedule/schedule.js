@@ -45,3 +45,7 @@ const buttonsTask = idTask => Extra.HTML().markup(Markup.inlineKeyboard[
   Markup.callbackButton('', `Delete ${idTask}`)
 ], { columns: 4 })
 
+bot.command('day', async context => {
+  const tasks = await getSchedule(moment())
+  context.reply(`Here is the your schedule of day`, buttonsSchedule(tasks))
+})
