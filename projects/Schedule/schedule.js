@@ -80,4 +80,9 @@ bot.command('completed', async context => {
   context.reply('These are the tasks you completed', buttonsSchedule(tasks))
 })
 
+bot.command('pending', async context => {
+  const tasks = await getPendingTasks()
+  context.reply('These are the pending tasks', buttonsSchedule(tasks))
+})
+
 bot.startPolling()
