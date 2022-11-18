@@ -3,23 +3,30 @@
     {
       "id": 1,
       "description": "To study Javascript",
-      "dt_prevision": "2022-11-17",
+      "dt_prevision": "2022-11-18",
       "dt_conclusion": null,
       "observation": "To post on LinkedIn what I am studying "
     },
     {
       "id": 2,
       "description": "To start one new project",
-      "dt_prevision": "2022-12-05",
+      "dt_prevision": "2022-11-19",
       "dt_conclusion": null,
       "observation": "Create concept map before."
     },
     {
       "id": 3,
       "description": "Test",
-      "dt_prevision": "2022-12-22",
-      "dt_conclusion": null,
+      "dt_prevision": "2022-11-17",
+      "dt_conclusion": "2022-11-18",
       "observation": "test 3"
+    },
+    {
+      "description": "Finalizar o bot e criar readme no Github",
+      "dt_prevision": null,
+      "dt_conclusion": null,
+      "observation": null,
+      "id": 4
     }
   ]
 }

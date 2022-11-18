@@ -10,7 +10,7 @@ const {
   getCompletedTasks,
   includeTask,
   concludeTask,
-  deleteTask
+  deleteTask,
 } = require('./services')
 
 const bot = new Telegraf(env.token)
@@ -81,14 +81,29 @@ bot.command('pending', async context => {
   context.reply('These are the pending tasks', buttonsSchedule(tasks))
 })
 
-bot.action(/display (.+)/, async context => {
+bot.action(/display (.+)/i, async context => {
   await displayTask(context, context.match[1])
 })
 
-bot.action(/conclude (.+)/, async context => {
+bot.action(/conclude (.+)/i, async context => {
   await concludeTask(context.match[1])
-  await displayTask(context.match[1])
+  await displayTask(context, context.match[1])
   await context.reply('Completed tasks!')
+})
+
+bot.action(/delete (.+)/i, async context => {
+  await deleteTask(context.match[1])
+  await context.editMessageText('Deleted task!')
+})
+
+bot.on('text', async context => {
+  try {
+    const task = await includeTask(context.update.message.text)
+    await displayTask(context, task.id, true)
+  }
+  catch (err) {
+    console.log(err)
+  }
 })
 
 bot.startPolling()

@@ -18,7 +18,7 @@ const getTask = async id => {
 
 const getPendingTasks = async () => {
   const res = await axios.get(`${baseUrl}?_sort=description&_order=asc`)
-  return res.data.filter(item => item.dt_prevision === null && item.dt_conclusion)
+  return res.data.filter(item => item.dt_prevision === null && item.dt_conclusion === null)
 }
 
 const getCompletedTasks = async () => {
