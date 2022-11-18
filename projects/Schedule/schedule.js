@@ -70,4 +70,9 @@ bot.command('tomorrow', async context => {
   context.reply('Here is your schedule until tomorrow', buttonsSchedule(tasks))
 })
 
+bot.command('week', async context => {
+  const tasks = await getSchedule(moment().add({ week: 1 }))
+  context.reply('Here is your week schedule', buttonsSchedule(tasks))
+})
+
 bot.startPolling()
