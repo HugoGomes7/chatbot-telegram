@@ -3,7 +3,11 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const moment = require('moment')
-const { getSchedule, getTask } = require('./services')
+const {
+  getSchedule,
+  getTask,
+  getPendingTasks,
+} = require('./services')
 
 const bot = new Telegraf(env.token)
 
