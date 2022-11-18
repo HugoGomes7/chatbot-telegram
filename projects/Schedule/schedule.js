@@ -61,10 +61,6 @@ bot.command('day', async context => {
   context.reply(`Here is the your schedule of day`, buttonsSchedule(tasks))
 })
 
-bot.action(/display (.+)/, async context => {
-  await displayTask(context, context.match[1])
-})
-
 bot.command('tomorrow', async context => {
   const tasks = await getSchedule(moment().add({ day: 1 }))
   context.reply('Here is your schedule until tomorrow', buttonsSchedule(tasks))
@@ -83,6 +79,16 @@ bot.command('completed', async context => {
 bot.command('pending', async context => {
   const tasks = await getPendingTasks()
   context.reply('These are the pending tasks', buttonsSchedule(tasks))
+})
+
+bot.action(/display (.+)/, async context => {
+  await displayTask(context, context.match[1])
+})
+
+bot.action(/conclude (.+)/, async context => {
+  await concludeTask(context.match[1])
+  await displayTask(context.match[1])
+  await context.reply('Completed tasks!')
 })
 
 bot.startPolling()
