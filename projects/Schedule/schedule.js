@@ -65,4 +65,9 @@ bot.action(/display (.+)/, async context => {
   await displayTask(context, context.match[1])
 })
 
+bot.command('tomorrow', async context => {
+  const tasks = await getSchedule(moment().add({ day: 1 }))
+  context.reply('Here is your schedule until tomorrow', buttonsSchedule(tasks))
+})
+
 bot.startPolling()
