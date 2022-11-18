@@ -21,8 +21,14 @@ const getPendingTasks = async () => {
   return res.data.filter(item => item.dt_prevision === null && item.dt_conclusion)
 }
 
+const getCompletedTasks = async () => {
+  const res = await axios.get(`${baseUrl}?_sort=dt.prevision,description&_order=asc`)
+  return res.data.filter(item => item.dt_conclusion !== null)
+}
+
 module.exports = {
   getSchedule,
   getTask,
   getPendingTasks,
+  getCompletedTasks
 }
