@@ -26,9 +26,15 @@ const getCompletedTasks = async () => {
   return res.data.filter(item => item.dt_conclusion !== null)
 }
 
+const includeTask = async desc => {
+  const res = await axios.post(`${baseUrl}`, { description: desc, dt_prevision: null, dt_conclusion: null, observation: null })
+  return res.data
+}
+
 module.exports = {
   getSchedule,
   getTask,
   getPendingTasks,
-  getCompletedTasks
+  getCompletedTasks,
+  includeTask
 }
