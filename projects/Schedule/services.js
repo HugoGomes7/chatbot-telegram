@@ -31,10 +31,17 @@ const includeTask = async desc => {
   return res.data
 }
 
+const concludeTask = async id => {
+  const task = await getTask(id)
+  const res = await axios.put(`${baseUrl}/${id}`, { ...task, dt_conclusion: moment().format('YYYY-MM-DD') })
+  return res.data
+}
+
 module.exports = {
   getSchedule,
   getTask,
   getPendingTasks,
   getCompletedTasks,
-  includeTask
+  includeTask,
+  concludeTask
 }
