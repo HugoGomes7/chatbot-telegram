@@ -75,4 +75,9 @@ bot.command('week', async context => {
   context.reply('Here is your week schedule', buttonsSchedule(tasks))
 })
 
+bot.command('completed', async context => {
+  const tasks = await getCompletedTasks()
+  context.reply('These are the tasks you completed', buttonsSchedule())
+})
+
 bot.startPolling()
