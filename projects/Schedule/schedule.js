@@ -9,7 +9,8 @@ const {
   getPendingTasks,
   getCompletedTasks,
   includeTask,
-  concludeTask
+  concludeTask,
+  deleteTask
 } = require('./services')
 
 const bot = new Telegraf(env.token)

@@ -37,11 +37,16 @@ const concludeTask = async id => {
   return res.data
 }
 
+const deleteTask = async id => {
+  await axios.delete(`${baseUrl}/${id}`)
+}
+
 module.exports = {
   getSchedule,
   getTask,
   getPendingTasks,
   getCompletedTasks,
   includeTask,
-  concludeTask
+  concludeTask,
+  deleteTask
 }
