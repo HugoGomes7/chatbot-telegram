@@ -3,6 +3,11 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const moment = require('moment')
+
+const session = require('telegraf/session')
+const Stage = require('telegraf/stage')
+const Scene = require('telegraf/scenes/base')
+
 const {
   getSchedule,
   getTask,
@@ -97,6 +102,8 @@ bot.action(/delete (.+)/i, async context => {
   await deleteTask(context.match[1])
   await context.editMessageText('Deleted task!')
 })
+
+
 
 bot.on('text', async context => {
   try {
