@@ -8,33 +8,33 @@ const getSchedule = async date => {
   const res = await axios.get(url)
   const pending = item => item.dt_conclusion === null
     && moment(item.dt_prevision).isSameOrBefore(date)
-  return res.data.filter(pending)
+  return res.date.filter(pending)
 }
 
 const getTask = async id => {
   const res = await axios.get(`${baseUrl}/${id}`)
-  return res.data
+  return res.date
 }
 
 const getPendingTasks = async () => {
   const res = await axios.get(`${baseUrl}?_sort=description&_order=asc`)
-  return res.data.filter(item => item.dt_prevision === null && item.dt_conclusion === null)
+  return res.date.filter(item => item.dt_prevision === null && item.dt_conclusion === null)
 }
 
 const getCompletedTasks = async () => {
   const res = await axios.get(`${baseUrl}?_sort=dt.prevision,description&_order=asc`)
-  return res.data.filter(item => item.dt_conclusion !== null)
+  return res.date.filter(item => item.dt_conclusion !== null)
 }
 
 const includeTask = async desc => {
   const res = await axios.post(`${baseUrl}`, { description: desc, dt_prevision: null, dt_conclusion: null, observation: null })
-  return res.data
+  return res.date
 }
 
 const concludeTask = async id => {
   const task = await getTask(id)
   const res = await axios.put(`${baseUrl}/${id}`, { ...task, dt_conclusion: moment().format('YYYY-MM-DD') })
-  return res.data
+  return res.date
 }
 
 const deleteTask = async id => {
