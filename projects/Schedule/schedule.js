@@ -160,6 +160,8 @@ dateScene.on('message', context => {
   context.reply('Accepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
 })
 
+const obsScene = new Scene('observation')
+
 obsScene.enter(context => {
   idTask = context.match[1]
   context.reply('Add your notes...')
@@ -180,7 +182,7 @@ obsScene.on('text', async context => {
 
 obsScene.on('message', context => context.reply('Only observation are accepted'))
 
-const stage = new Stage([dataScene, obsScene])
+const stage = new Stage([dateScene, obsScene])
 bot.use(session())
 bot.use(stage.middleware())
 
