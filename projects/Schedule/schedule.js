@@ -160,16 +160,6 @@ dateScene.on('message', context => {
   context.reply('Accepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
 })
 
-bot.on('text', async context => {
-  try {
-    const task = await includeTask(context.update.message.text)
-    await displayTask(context, task.id, true)
-  }
-  catch (err) {
-    console.log(err)
-  }
-})
-
 obsScene.enter(context => {
   idTask = context.match[1]
   context.reply('Add your notes...')
@@ -196,5 +186,15 @@ bot.use(stage.middleware())
 
 bot.action(/setDate (.+)/, Stage.enter('date'))
 bot.action(/addNote (.+)/, Stage.enter('observation'))
+
+bot.on('text', async context => {
+  try {
+    const task = await includeTask(context.update.message.text)
+    await displayTask(context, task.id, true)
+  }
+  catch (err) {
+    console.log(err)
+  }
+})
 
 bot.startPolling()
