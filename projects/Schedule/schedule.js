@@ -182,7 +182,19 @@ obsScene.on('text', async context => {
   const newText = context.update.message.text
   const obs = task.observation ?
     task.observation + '\n------\n' + newText : newText
-  const res = await updateObsTask(idTask,)
+  const res = await updateObsTask(idTask, obs)
+  await context.reply('Added observation!')
+  await displayTask(context, idTask, true)
+  context.scene.leave()
 })
+
+obsScene.on('message', context => context.reply('Only observation are accepted'))
+
+const stage = new Stage([dataScene, obsScene])
+bot.use(session())
+bot.use(stage.middleware())
+
+bot.action(/setDate (.+)/, Stage.enter('date'))
+bot.action(/addNote (.+)/, Stage.enter('observation'))
 
 bot.startPolling()
