@@ -103,7 +103,10 @@ bot.action(/delete (.+)/i, async context => {
   await context.editMessageText('Deleted task!')
 })
 
-
+const keyboardDates = Markup.keyboard([
+  ['Today', 'Tomorrow'],
+  ['1 week', '1 Month'],
+]).resize().oneTime().extra()
 
 bot.on('text', async context => {
   try {
