@@ -11,6 +11,8 @@ const {
   includeTask,
   concludeTask,
   deleteTask,
+  updateDateTask,
+  updateObsTask
 } = require('./services')
 
 const bot = new Telegraf(env.token)
