@@ -108,6 +108,58 @@ const keyboardDates = Markup.keyboard([
   ['1 week', '1 Month'],
 ]).resize().oneTime().extra()
 
+let idTask = null
+
+const dateScene = new Scene('date')
+
+dateScene.enter(context => {
+  idTask = context.match[1]
+  context.reply('Do you want to set some date?', keyboardDates)
+})
+
+dateScene.leave(context => idTask = null)
+
+dateScene.hears(/today/gi, async context => {
+  const date = moment()
+  handleDate(context, date)
+})
+
+dateScene.hears(/tomorrow/gi, async context => {
+  const date = moment().add({ days: 1 })
+  handleDate(context, date)
+})
+
+dateScene.hears(/^(\d+) days?$/gi, async context => {
+  const date = moment().add({ days: context.match[1] })
+  handleDate(context, date)
+})
+
+dateScene.hears(/^(\d+) weeks?/gi, async context => {
+  const date = moment().add({ weeks: context.match[1] })
+  handleDate(context, date)
+})
+
+dateScene.hears(/^(\d+) months/gi, async context => {
+  const date = moment().add({ months: context.match[1] })
+  handleDate(context, date)
+})
+
+dateScene.hears(/(\d{2}\/\d{2}\/\d{4})/g, async context => {
+  const date = moment(context.match[1], 'DD/MM/YYYY')
+  handleDate(context, date)
+})
+
+const handleDate = async (context, date) => {
+  await updateDateTask(idTask, date)
+  await context.reply('Date update!')
+  await displayTask(context, idTask, true)
+  context.scene.leave()
+}
+
+dataScene.on('message', context => {
+  context.reply('Accepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
+})
+
 bot.on('text', async context => {
   try {
     const task = await includeTask(context.update.message.text)
