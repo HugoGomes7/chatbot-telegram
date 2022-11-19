@@ -156,7 +156,7 @@ const handleDate = async (context, date) => {
   context.scene.leave()
 }
 
-dataScene.on('message', context => {
+dateScene.on('message', context => {
   context.reply('Accepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
 })
 
@@ -168,6 +168,21 @@ bot.on('text', async context => {
   catch (err) {
     console.log(err)
   }
+})
+
+obsScene.enter(context => {
+  idTask = context.match[1]
+  context.reply('Add your notes...')
+})
+
+obsScene.leave(context => idTask = null)
+
+obsScene.on('text', async context => {
+  const task = await getTask(idTask)
+  const newText = context.update.message.text
+  const obs = task.observation ?
+    task.observation + '\n------\n' + newText : newText
+  const res = await updateObsTask(idTask,)
 })
 
 bot.startPolling()
