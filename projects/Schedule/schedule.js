@@ -42,9 +42,9 @@ const displayTask = async (context, taskId, newMessage = false) => {
   const conclusion = task.dt_conclusion ?
     `\n<b>Completed in:</b> ${formatDate(task.dt_conclusion)}` : ''
   const msg = `
-    <b>${task.description}</b>
-    <b>Prevision:</b> ${formatDate(task.dt_prevision)}${conclusion}
-    <b>Observations:</b>\n${task.observation || ''}
+    <b>Task: ${task.description}</b>
+    \n<b>Prevision:</b> ${formatDate(task.dt_prevision)}${conclusion}
+<b>Observations:</b>\n${task.observation || ''}
   `
   if (newMessage) {
     context.reply(msg, buttonsTask(taskId))
@@ -65,27 +65,27 @@ const buttonsSchedule = tasks => {
 
 bot.command('day', async context => {
   const tasks = await getSchedule(moment())
-  context.reply(`Here is the your schedule of day`, buttonsSchedule(tasks))
+  context.reply(`💡 Here is the your schedule of day.`, buttonsSchedule(tasks))
 })
 
 bot.command('tomorrow', async context => {
   const tasks = await getSchedule(moment().add({ day: 1 }))
-  context.reply('Here is your schedule until tomorrow', buttonsSchedule(tasks))
+  context.reply('💡 Here is your schedule until tomorrow.', buttonsSchedule(tasks))
 })
 
 bot.command('week', async context => {
   const tasks = await getSchedule(moment().add({ week: 1 }))
-  context.reply('Here is your week schedule', buttonsSchedule(tasks))
+  context.reply('💡 Here is your week schedule.', buttonsSchedule(tasks))
 })
 
 bot.command('completed', async context => {
   const tasks = await getCompletedTasks()
-  context.reply('These are the tasks you completed', buttonsSchedule(tasks))
+  context.reply('💡 These are the tasks you completed.', buttonsSchedule(tasks))
 })
 
 bot.command('pending', async context => {
   const tasks = await getPendingTasks()
-  context.reply('These are the pending tasks', buttonsSchedule(tasks))
+  context.reply('💡 These are the pending tasks.', buttonsSchedule(tasks))
 })
 
 bot.action(/display (.+)/i, async context => {
@@ -95,12 +95,12 @@ bot.action(/display (.+)/i, async context => {
 bot.action(/conclude (.+)/i, async context => {
   await concludeTask(context.match[1])
   await displayTask(context, context.match[1])
-  await context.reply('Completed tasks!')
+  await context.reply('Completed tasks! ✔️')
 })
 
 bot.action(/delete (.+)/i, async context => {
   await deleteTask(context.match[1])
-  await context.editMessageText('Deleted task!')
+  await context.editMessageText('Deleted task! ❌')
 })
 
 const keyboardDates = Markup.keyboard([
@@ -114,7 +114,7 @@ const dateScene = new Scene('date')
 
 dateScene.enter(context => {
   idTask = context.match[1]
-  context.reply('Do you want to set some date?', keyboardDates)
+  context.reply('Do you want to set some date? 📅', keyboardDates)
 })
 
 dateScene.leave(context => idTask = null)
@@ -139,7 +139,7 @@ dateScene.hears(/^(\d+) weeks?/gi, async context => {
   handleDate(context, date)
 })
 
-dateScene.hears(/^(\d+) months/gi, async context => {
+dateScene.hears([/^(\d+) months/gi, /^(\d+) month/gi], async context => {
   const date = moment().add({ months: context.match[1] })
   handleDate(context, date)
 })
@@ -151,20 +151,20 @@ dateScene.hears(/(\d{2}\/\d{2}\/\d{4})/g, async context => {
 
 const handleDate = async (context, date) => {
   await updateDateTask(idTask, date)
-  await context.reply('Date update!')
+  await context.reply('Date update! 📆✔️')
   await displayTask(context, idTask, true)
   context.scene.leave()
 }
 
 dateScene.on('message', context => {
-  context.reply('Accepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
+  context.reply('ERROR! ❌\nAccepted standards:\ndd/MM/YYYY\nX days\nX weeks\nX months')
 })
 
 const obsScene = new Scene('observation')
 
 obsScene.enter(context => {
   idTask = context.match[1]
-  context.reply('Add your notes...')
+  context.reply('Add your notes... ✍️')
 })
 
 obsScene.leave(context => idTask = null)
@@ -175,12 +175,12 @@ obsScene.on('text', async context => {
   const obs = task.observation ?
     task.observation + '\n------\n' + newText : newText
   const res = await updateObsTask(idTask, obs)
-  await context.reply('Added observation!')
+  await context.reply('Added observation! 📝✔️')
   await displayTask(context, idTask, true)
   context.scene.leave()
 })
 
-obsScene.on('message', context => context.reply('Only observation are accepted'))
+obsScene.on('message', context => context.reply('❌ Only observation are accepted!'))
 
 const stage = new Stage([dateScene, obsScene])
 bot.use(session())

@@ -3,86 +3,58 @@
     {
       "id": 1,
       "description": "To study Javascript",
-      "dt_prevision": "2022-11-19",
-      "dt_conclusion": "2022-11-19",
+      "dt_prevision": "2022-11-22",
+      "dt_conclusion": null,
       "observation": "To post on LinkedIn what I am studying "
     },
     {
-      "id": 2,
-      "description": "To start one new project",
-      "dt_prevision": "2022-11-21",
+      "description": "Atividade teste 1",
+      "dt_prevision": "2022-11-23",
       "dt_conclusion": null,
-      "observation": "Create concept map before."
+      "observation": "Observação teste",
+      "id": 2
     },
     {
-      "id": 3,
-      "description": "Test",
-      "dt_prevision": "2022-11-17",
-      "dt_conclusion": "2022-11-18",
-      "observation": "test 3"
+      "description": "Atividade teste 3",
+      "dt_prevision": "2022-11-22",
+      "dt_conclusion": "2022-11-22",
+      "observation": "Vou completar agora",
+      "id": 3
     },
     {
-      "description": "Finalizar o bot e criar readme no Github",
+      "description": "Atividade teste 4",
       "dt_prevision": null,
       "dt_conclusion": null,
       "observation": null,
       "id": 4
     },
     {
-      "description": "teste",
+      "description": "Atividade pendente",
       "dt_prevision": null,
       "dt_conclusion": null,
       "observation": null,
       "id": 5
     },
     {
-      "description": "testando",
+      "description": "/conclude",
       "dt_prevision": null,
       "dt_conclusion": null,
       "observation": null,
       "id": 6
     },
     {
-      "description": "teste",
+      "description": "/complete",
       "dt_prevision": null,
       "dt_conclusion": null,
       "observation": null,
       "id": 7
     },
     {
-      "description": "testando",
+      "description": "/display",
       "dt_prevision": null,
       "dt_conclusion": null,
       "observation": null,
       "id": 8
-    },
-    {
-      "description": "teste",
-      "dt_prevision": null,
-      "dt_conclusion": null,
-      "observation": null,
-      "id": 9
-    },
-    {
-      "description": "testando",
-      "dt_prevision": null,
-      "dt_conclusion": null,
-      "observation": null,
-      "id": 10
-    },
-    {
-      "description": "postar projeto do chatbot finalizado no Linkedin",
-      "dt_prevision": "2022-11-19",
-      "dt_conclusion": null,
-      "observation": "gravar vídeo e criar o readme",
-      "id": 11
-    },
-    {
-      "description": "teste",
-      "dt_prevision": "2022-10-11",
-      "dt_conclusion": "2022-11-19",
-      "observation": "123ewqgbqwe e",
-      "id": 12
     }
   ]
 }
