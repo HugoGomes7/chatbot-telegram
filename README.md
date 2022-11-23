@@ -5,8 +5,11 @@
 # About the project
 in this project I developed one Telegram Bot able of assisting the user in some automated tasks. Integrated in 3 other projects within the same project: Shopping List, Chatbot and Schedule.
 
-...Session, Scene e Stage and others
+I used in a Telegram API the Middleware pattern/Chain of responsibility and Axios standard project to make HTTP requests. The database was developed with json-server (plugin NodeJs). In addition, the use of Scene, Stage and Session was essential.
 
+
+# Chain of Resposability diagram
+![chain-of-resposability](https://user-images.githubusercontent.com/65207104/203533186-21adc06c-3ebf-4016-b97e-7913aec6d02f.png)
 
 
 # Concept Map
@@ -36,6 +39,10 @@ https://user-images.githubusercontent.com/65207104/203457825-f8e429fb-b9d6-4275-
 # Technologies used
 - Javascript
 - NodeJs
+- Axios
+- Momment
+- API (Telegraf)
+- json-server
 
 # How to run project
 
@@ -44,18 +51,35 @@ git clone https://github.com/HugoGomes7/chatbot-telegram
 
 
 ## open project folder
-...........
+
+## install Code Runner extension
 
 ## install dependencys
-.............
+- npm i telegraf @3.17.3 -E
+- npm i axios@0.17.1 --save -E
+- npm install moment
+- npm i --save node-schedule@1.3.0 -E
+- npm i --save json-server
 
 # Run Schedule Bot
-- Open folder Schedule
-- Open file Schedule
+- Open Schedule folder 
+- Open Schedule file 
 - npm start (start db)
 - node Schedule (start bot)
 
+# Run Shopping List
+- Open ShoppingList folder 
+- Open individualList or groupList file
+- CTRL + ALT + N (start bot) / CTRL + ALT + M (stop bot)
+- Search to "Dluccabot"
+- Open chat or add in a group 
 
+# Run Chatbot
+- Open Chatbot folder 
+- Open chatBot file
+- CTRL + ALT + N (start bot) / CTRL + ALT + M (stop bot)
+- Search to "Dluccabot"
+- Start chat with the /start command 
 
 ```
 # Author
